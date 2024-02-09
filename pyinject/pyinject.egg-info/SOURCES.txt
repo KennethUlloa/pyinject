@@ -1,0 +1,7 @@
+README.md
+setup.py
+pyinject/pyinject.egg-info/PKG-INFO
+pyinject/pyinject.egg-info/SOURCES.txt
+pyinject/pyinject.egg-info/dependency_links.txt
+pyinject/pyinject.egg-info/requires.txt
+pyinject/pyinject.egg-info/top_level.txt

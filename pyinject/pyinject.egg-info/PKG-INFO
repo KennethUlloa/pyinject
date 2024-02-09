@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: pyinject
+Version: 1.0.0
+Summary: Dependency injection package
+Home-page: 
+Author: Kenneth Ulloa
+Author-email: ulloakenth@gmail.com
+Classifier: Intended Audience :: Developers
+Classifier: Programing Language :: Python :: 3.11
+Classifier: Topic :: Utilities
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+
+# PyInject
+Dependency injection library. Aims to be as simple as posible.
+
+## Usage
+Using `Dependency` will create the object in every call.
+```python
+# example.py
+# import the dependency you need and the decorator 'inject'
+from pyinject import Dependency, inject
+
+class MyNeededDependency:
+    def __init__(self, arg, other_arg):
+        pass
+
+# Supports *args and *kwargs
+dependency = Dependency(MyNeededDependency,"some argument", other_arg="other arg")
+
+@inject
+def some_awesome_function(my_dependency: MyNeededDependency = dependency):
+    # Do something cool with my_dependency
+    pass
+```
+
+Using `SingletonDependency` will create the object in the first call and return 
+the saved instance in later calls.
+```python
+from pyinject import SingletonDependency
+class MyNeededDependency:
+    pass
+# Same code from above
+dependency = SingletonDependency(MyNeededDependency, "one_argument", other_args=1)
+# Same code
+```
+It's important to clarify that the SingletonDependency itself is not a Singleton. 
+This means if this object is recreated, the dependency will be recreated again in 
+the first call of the injection method.
+
+You might want to use another object to hold all of your dependency creators.
+```python
+# example.py
+from pyinject import Dependency, SingletonDependency, inject
+
+class DB:
+    pass
+
+
+class Service:
+    # No need to specify a default value, since it will be used 
+    @inject
+    def __init__(self, db: DB):
+        pass
+
+
+class MyDependenciesHolder:
+    db = SingletonDependency(DB, "connection_string")
+    #Here a dependency can call another if the __init__ function is decorated with @inject
+    service = Dependency(Service, db) 
+    
+```

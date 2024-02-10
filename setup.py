@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     author='Kenneth Ulloa',
     author_email='ulloakenth@gmail.com',
-    url='',
+    url='https://github.com/KennethUlloa/pyinject',
     classifiers=[
         "Intended Audience :: Developers",
         "Programing Language :: Python :: 3.11",

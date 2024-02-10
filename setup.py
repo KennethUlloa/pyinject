@@ -8,7 +8,7 @@ setuptools.setup(
     name="pyinject",
     version='1.0.0',
     description='Dependency injection package',
-    package_dir={"": "pyinject"},
+    package_dir={"pyinject": "pyinject"},
     long_description=long_desc,
     long_description_content_type='text/markdown',
     author='Kenneth Ulloa',
@@ -20,7 +20,7 @@ setuptools.setup(
         "Topic :: Utilities"
     ],
     python_requires=">=3.10",
-    packages=setuptools.find_packages(where="pyinject"),
+    packages=["pyinject"],
     include_package_data=True,
     extras_require={
         "dev": ["pytest"]

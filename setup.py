@@ -16,7 +16,6 @@ setuptools.setup(
     url='https://github.com/KennethUlloa/pyinject',
     classifiers=[
         "Intended Audience :: Developers",
-        "Programing Language :: Python :: 3.11",
         "Topic :: Utilities"
     ],
     python_requires=">=3.10",

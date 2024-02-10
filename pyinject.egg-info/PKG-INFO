@@ -6,7 +6,6 @@ Home-page: https://github.com/KennethUlloa/pyinject
 Author: Kenneth Ulloa
 Author-email: ulloakenth@gmail.com
 Classifier: Intended Audience :: Developers
-Classifier: Programing Language :: Python :: 3.11
 Classifier: Topic :: Utilities
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown

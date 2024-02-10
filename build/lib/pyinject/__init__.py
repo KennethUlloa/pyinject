@@ -1,2 +1,2 @@
-from .dependency import Dependency, SingletonDependency, DependantDependency
+from .dependency import Dependency, DependantDependency
 from .injection import inject

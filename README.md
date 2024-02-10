@@ -30,7 +30,7 @@ class MyNeededDependency:
 dependency = Dependency(MyNeededDependency, "one_argument", other_args=1, is_singleton=True)
 # Same code
 ```
-Take in count that `is_instance` keyword argument is reserved and will be removed from the
+Take in count that `is_singleton` keyword argument is reserved and will be removed from the
 kwargs dictionary passed to the dependency.
 
 You might want to use another object to hold all of your dependency creators.

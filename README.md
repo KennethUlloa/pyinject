@@ -20,25 +20,23 @@ def some_awesome_function(my_dependency: MyNeededDependency = dependency):
     # Do something cool with my_dependency
     pass
 ```
-
-Using `SingletonDependency` will create the object in the first call and return 
-the saved instance in later calls.
+To use Singleton pattern 
 ```python
-from pyinject import SingletonDependency
+from pyinject import Dependency
 class MyNeededDependency:
     pass
 # Same code from above
-dependency = SingletonDependency(MyNeededDependency, "one_argument", other_args=1)
+# use is_singleton keyword argument
+dependency = Dependency(MyNeededDependency, "one_argument", other_args=1, is_singleton=True)
 # Same code
 ```
-It's important to clarify that the SingletonDependency itself is not a Singleton. 
-This means if this object is recreated, the dependency will be recreated again in 
-the first call of the injection method.
+Take in count that `is_instance` keyword argument is reserved and will be removed from the
+kwargs dictionary passed to the dependency.
 
 You might want to use another object to hold all of your dependency creators.
 ```python
 # example.py
-from pyinject import Dependency, SingletonDependency, inject
+from pyinject import Dependency, DependantDependency, inject
 
 class DB:
     pass
@@ -46,14 +44,17 @@ class DB:
 
 class Service:
     # No need to specify a default value, since it will be used 
-    @inject
     def __init__(self, db: DB):
         pass
 
 
 class MyDependenciesHolder:
-    db = SingletonDependency(DB, "connection_string")
-    #Here a dependency can call another if the __init__ function is decorated with @inject
-    service = Dependency(Service, db) 
-    
+    # A simple dependency
+    db = Dependency(DB, "connection_string", is_singleton=True)
+    # Here a dependency can call another if the __init__ function is decorated with @inject
+    service = DependantDependency(Service, db, is_singleton=True)
+
+@inject
+def some_func(service: Service = MyDependenciesHolder.service):
+    pass
 ```

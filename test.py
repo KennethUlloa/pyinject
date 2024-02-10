@@ -1,4 +1,4 @@
-from pyinject import Dependency, inject
+from pyinject import Dependency, inject, DependantDependency
 
 
 class DB:
@@ -12,7 +12,7 @@ class Service:
 
 
 db_dep = Dependency(DB, "a str")
-serv = Dependency(Service, db=db_dep.inject())
+serv = DependantDependency(Service, db=db_dep)
 
 
 @inject

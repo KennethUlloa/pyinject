@@ -41,27 +41,12 @@ class Dependency(Generic[T]):
             return self.some_type(*self.args, **self.kwargs)
 
 
-class SingletonDependency(Dependency[T]):
-    """
-    Singleton approach for dependency. It creates the instance and saves it so
-    the next time it's called, it will return the saved object
-    """
-
-    def __init__(self, some_type: Type[T], *args, **kwargs):
-        super().__init__(some_type, *args, **kwargs)
-        self.instance = None
-
-    def inject(self) -> T:
-        if not self.instance:
-            self.instance = super().inject()
-        return self.instance
-
-
 class DependantDependency(Dependency[T]):
     """
     Searches through the provided arguments to find whether it contains dependency objects.
     If so, then it will call the inject method on each of them and replaced them with the injected dependency
     """
+
     def __init__(self, some_type: Type[T], *args, **kwargs):
         super().__init__(some_type, *args, **kwargs)
 
@@ -82,4 +67,3 @@ class DependantDependency(Dependency[T]):
                 self.instance = self.some_type(*new_args, **new_kwargs)
 
             return self.instance
-

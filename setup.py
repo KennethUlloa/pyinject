@@ -6,7 +6,7 @@ with open("README.md", "r", encoding='utf-8') as f:
 
 setuptools.setup(
     name="pyinject",
-    version='1.0.0',
+    version='1.1.0',
     description='Dependency injection package',
     package_dir={"pyinject": "pyinject"},
     long_description=long_desc,
